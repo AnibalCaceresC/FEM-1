@@ -29,3 +29,5 @@ print(Nodos)
 
 print(Nodos[0])
 
+"creación de las funciones a trozos"
+

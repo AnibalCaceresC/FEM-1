@@ -1,4 +1,5 @@
 import numpy
+import matplotlib
 
 "ingresamos los valores requeridos"
 
@@ -30,4 +31,15 @@ print(Nodos)
 print(Nodos[0])
 
 "creación de las funciones a trozos"
+
+x=numpy.linspace(a,b)
+for i in range (1, len(Nodos)-2, 1):
+    def phi(i,x):
+        return numpy.piecewise(x, [x<Nodos[i-1], x<Nodos[i], x<Nodos[i+1], x>Nodos[i+1]],[lambda x:0, lambda x:(x-Nodos[i-1])/(Nodos[i]-Nodos[i-1]), lambda x:(Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i]), lambda x: 0])
+
+
+
+print(phi(2,x))
+
+
 

@@ -1,41 +1,34 @@
-import numpy
-import matplotlib
+import numpy as np
+import matplotlib as mpl
 
-"ingresamos los valores requeridos"
-
+"Domain data"
 a=0
 b=1
-n=6
 
-"calculo de la longitud (h) de los elementos"
+"Domain decomposition (uniform mesh)"
+n=6 #Number of elements 
+h=(b-a)/n #element length
+np.set_printoptions(precision=2,suppress=True)
+print('element length: h=',f"{h:.2f}","\n") #https://blog.teclado.com/python-formatting-numbers-for-printing/
 
-h=(b-a)/(n-1)
-
-print('Tamaño de los elementos h=')
-print(h)
-
-"Generacion de la lista de nodos"
-
-nodos=[]
-for i in range(n):
+nodos=[] #Mesh node vector 
+for i in range(n+1):
     i=a+h*i
     nodos.append(i)
 
-print(nodos)
+#print("Node list: ",nodos)
 
-Nodos= numpy.array(nodos) #convertimos la lista de nodos en array
+Nodos= np.array(nodos) #conversion to array of nodes
+print("Node numpy-array: ",Nodos, "\n")
 
 
-print(Nodos)
-
-print(Nodos[0])
-
+#https://www.pythonpool.com/numpy-piecewise/
 "creación de las funciones a trozos"
 
-x=numpy.linspace(a,b)
+x=np.linspace(a,b)
 for i in range (1, len(Nodos)-2, 1):
     def phi(i,x):
-        return numpy.piecewise(x, [x<Nodos[i-1], x<Nodos[i], x<Nodos[i+1], x>Nodos[i+1]],[lambda x:0, lambda x:(x-Nodos[i-1])/(Nodos[i]-Nodos[i-1]), lambda x:(Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i]), lambda x: 0])
+        return np.piecewise(x, [x<Nodos[i-1], x<Nodos[i], x<Nodos[i+1], x>Nodos[i+1]],[lambda x:0, lambda x:(x-Nodos[i-1])/(Nodos[i]-Nodos[i-1]), lambda x:(Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i]), lambda x: 0])
 
 
 

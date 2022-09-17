@@ -6,7 +6,7 @@ a=0
 b=1
 
 "Domain decomposition (uniform mesh)"
-n=6 #Number of elements 
+n=5 #Number of elements 
 h=(b-a)/n #element length
 np.set_printoptions(precision=2,suppress=True)
 print('element length: h=',f"{h:.2f}","\n") #https://blog.teclado.com/python-formatting-numbers-for-printing/

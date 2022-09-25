@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 "Domain data"
 a=0
@@ -21,18 +21,26 @@ for i in range(n+1):
 Nodos= np.array(nodos) #conversion to array of nodes
 print("Node numpy-array: ",Nodos, "\n")
 
+print(len(Nodos))
 
 #https://www.pythonpool.com/numpy-piecewise/
 "creación de las funciones a trozos"
 
 x=np.linspace(a,b)
-for i in range (1, len(Nodos)-2, 1):
-    def phi(i,x):
-        return np.piecewise(x, [x<Nodos[i-1], x<Nodos[i], x<Nodos[i+1], x>Nodos[i+1]],[lambda x:0, lambda x:(x-Nodos[i-1])/(Nodos[i]-Nodos[i-1]), lambda x:(Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i]), lambda x: 0])
+
+def phi(i,x):
+    y = np.piecewise(x, [x<Nodos[i-1], 
+        x<Nodos[i], x<Nodos[i+1], x>Nodos[i+1]],
+        [lambda x:0, 
+        lambda x:(x-Nodos[i-1])/(Nodos[i]-Nodos[i-1]), 
+        lambda x:(Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i]), 
+        lambda x: 0])
+
+    return y 
 
 
+print(x)
 
-print(phi(2,x))
-
-
+plt.plot(x,y)
+plt.show
 

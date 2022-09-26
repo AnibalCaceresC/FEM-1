@@ -20,3 +20,15 @@ for i in range (1, len(Nodos)-2, 1):
         lambda x:(x-Nodos[i-1])/(Nodos[i]-Nodos[i-1]), 
         lambda x:(Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i]), 
         lambda x: 0])
+
+
+
+def phi(x):
+    if x<Nodos[i-1]:
+        return 0
+    elif x>=Nodos[i-1] and x<Nodos[1]:
+        return (x -Nodos[i-1])/(Nodos[i]-Nodos[i-1])
+    elif x>=Nodos[i] and x<Nodos[i+1]:
+        return (Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i])
+    elif x>Nodos[i+1]:
+        return 0

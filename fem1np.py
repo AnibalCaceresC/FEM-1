@@ -8,7 +8,7 @@ b=1
 "Domain decomposition (uniform mesh)"
 n=5 #Number of elements 
 h=(b-a)/n #element length
-np.set_printoptions(precision=2,suppress=True)
+np.set_printoptions(precision=6,suppress=True)
 print('element length: h=',f"{h:.2f}","\n") #https://blog.teclado.com/python-formatting-numbers-for-printing/
 
 nodos=[] #Mesh node vector 
@@ -26,20 +26,24 @@ print(len(Nodos))
 #https://www.pythonpool.com/numpy-piecewise/
 "creación de las funciones a trozos"
 
-x=np.linspace(a,b)
+x=np.linspace(a,b,10)
+print(x)
 
 def phi(i,x):
-    y = np.piecewise(x, [x<Nodos[i-1], 
-        x<Nodos[i], x<Nodos[i+1], x>Nodos[i+1]],
-        [lambda x:0, 
-        lambda x:(x-Nodos[i-1])/(Nodos[i]-Nodos[i-1]), 
-        lambda x:(Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i]), 
-        lambda x: 0])
+    if x<Nodos[i-1]:
+        return 0
+    elif x>=Nodos[i-1] and x<Nodos[i]:
+        yy = (x -Nodos[i-1])/(Nodos[i]-Nodos[i-1])
+        return yy
+    elif x>=Nodos[i] and x<Nodos[i+1]:
+        yy = (Nodos[i+1]-x)/(Nodos[i+1]-Nodos[i])
+        return yy
+    elif x>Nodos[i+1]:
+        return 0
 
-    return y 
+phi = np.vectorize(phi)
 
-
-print(x)
+y = phi(1,x)
 
 plt.plot(x,y)
 plt.show
